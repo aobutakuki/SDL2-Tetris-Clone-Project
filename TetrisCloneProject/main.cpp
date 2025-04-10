@@ -48,7 +48,7 @@ int main(int argc, char* args[])
     
     std::vector<std::unique_ptr<gameObject>> gameObjects;
     
-    gameObjects.push_back(std::make_unique<gameObject>(330, 40, 50, 50, 1.0f));
+    gameObjects.push_back(std::make_unique<gameObject>(330, 40, 10, 10, 1.0f,"Rectangle"));
     for (auto& gameObj : gameObjects)
     {
         std::cout << "Object found, initialized with parameters(x,y,w,h,velocity):"; gameObj->getObjInfo();
