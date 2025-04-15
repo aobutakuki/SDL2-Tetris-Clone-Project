@@ -39,7 +39,7 @@ int main(int argc, char* args[])
         return -1;
     }
 
-    SDL_Rect playArea = { 320, 30, 310, 440 };
+    SDL_Rect playArea = { 230, 40, 200, 400 };
 
     // Main loop
     bool quit = false;
@@ -60,6 +60,7 @@ int main(int argc, char* args[])
         {
             gameObjects.push_back(std::make_unique<gameObject>(330, 40, 10, 10, 1.0f, "Rectangle"));
             std::cout << "Object created" << "\n";
+ 
             createObject = false;
         }
         // Handle events
@@ -71,32 +72,24 @@ int main(int argc, char* args[])
             }
         }
 
-        // Clear screen (fill with white)
-        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        // Clear screen (fill with black)
+        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderClear(renderer);
 
-        // Draw red rectangle
-        SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+        // Draw white rectangle
+        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderDrawRect(renderer, &playArea);
 
-        
         for (auto& gameObj : gameObjects) {
             gameObj->checkPos();
             gameObj->update();
-            
-            if (gameObj->checkStop())
-            {
-                std::cout << "\n" << "gameObj has stopped" << "\n";
-                createObject = true;
-                SDL_Delay(20);
-            }
         }
-        
+
         for (auto& gameObj : gameObjects) {
             gameObj->render(renderer);
-            
-            
         }
+
+       
         // Update screen
         SDL_RenderPresent(renderer);
 
