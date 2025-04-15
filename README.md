@@ -11,6 +11,8 @@ This read me will be updated as time goes on.
 
 ## Notes (To-do)
 
+- Make shape/Play area rectangles 🟢
+- Add movement to the shape 🟢
 - Make a grid-system for easier collision detection 🟡
 - Use git and create new branches so it is easier to experiment 🟢
 - Randomize the way that the shapes get produced
