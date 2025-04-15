@@ -53,8 +53,15 @@ int main(int argc, char* args[])
     {
         std::cout << "Object found, initialized with parameters(x,y,w,h,velocity):"; gameObj->getObjInfo();
     }
+    bool createObject = false;
     while (!quit)
     {
+        if (createObject)
+        {
+            gameObjects.push_back(std::make_unique<gameObject>(330, 40, 10, 10, 1.0f, "Rectangle"));
+            std::cout << "Object created" << "\n";
+            createObject = false;
+        }
         // Handle events
         while (SDL_PollEvent(&e) != 0)
         {
@@ -74,16 +81,26 @@ int main(int argc, char* args[])
 
         
         for (auto& gameObj : gameObjects) {
+            gameObj->checkPos();
             gameObj->update();
+            
+            if (gameObj->checkStop())
+            {
+                std::cout << "\n" << "gameObj has stopped" << "\n";
+                createObject = true;
+                SDL_Delay(20);
+            }
         }
         
         for (auto& gameObj : gameObjects) {
             gameObj->render(renderer);
+            
+            
         }
         // Update screen
         SDL_RenderPresent(renderer);
 
-        SDL_Delay(10);
+        SDL_Delay(20);
     }
 
     // Clean up

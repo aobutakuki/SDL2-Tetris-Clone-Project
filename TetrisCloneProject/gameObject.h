@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 class gameObject
 {
@@ -11,6 +12,9 @@ private:
 	SDL_Rect shapeParts[4];
 	int j;
 	float velocity = 1;
+	std::vector<int> mainObj_y;
+	bool stop = false;
+	bool firstObject = true;
 
 public:
 	//Store game objects inside an array rect for different shapes
@@ -20,6 +24,10 @@ public:
 	virtual ~gameObject() { if (objTexture)SDL_DestroyTexture(objTexture); }
 
 	virtual void update();
+
+	virtual void checkPos();
+
+	virtual bool checkStop()  const { return stop; };
 
 	virtual void render(SDL_Renderer* renderer);
 
